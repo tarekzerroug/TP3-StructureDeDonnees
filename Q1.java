@@ -11,6 +11,10 @@ public class Q1 {
         CommitNode left, right;
         
         public CommitNode(int timestamp, String commitHash, String author) {
+        this.timestamp = timestamp;
+         this.commitHash = commitHash;
+         this.author  = author;
+ 
         }
     }
     
@@ -21,9 +25,44 @@ public class Q1 {
     
 
     public void insert(int timestamp, String commitHash, String author) {
-        // TODO:
-    }
+        CommitNode newnode = new CommitNode(timestamp, commitHash, author);
+        
+
+        if (root == null) {
+            root = newnode ;
+            return ;
+        }
+        CommitNode marqueur = root ;
+
+        while(true) {
+          if (newnode.timestamp < marqueur.timestamp ) {
+                if (marqueur.left == null) {
+                  marqueur.left = newnode ;
+                  System.out.println("inserted left of " + marqueur.timestamp);
+                  return ;
+                } else{
+                  marqueur = marqueur.left;
+                }
+                                
+            } else if (newnode.timestamp > marqueur.timestamp) {
+                
+                if (marqueur.right == null) {
+                  marqueur.right = newnode ;
+                  System.out.println("inserted right of " + marqueur.timestamp);
+
+                  return ;
+                } else{
+                  marqueur = marqueur.right;
+                }
+            }
+
+         
+        }
+        
     
+    }
+        
+  
 
     public String findCommit(int timestamp) {
         // TODO: 
@@ -65,7 +104,17 @@ public class Q1 {
     }
     
 
-    
-    
+    // debogage 
+    // à supprimer après
+    public void printRootInfo() {
+    if (root == null) {
+        System.out.println("Tree is empty");
+    } else {
+        System.out.println("Root: " + root.timestamp);
+        System.out.println("Left: " + (root.left != null ? root.left.timestamp : "null"));
+        System.out.println("Right: " + (root.right != null ? root.right.timestamp : "null"));
+    }
+}
     
 }
+
