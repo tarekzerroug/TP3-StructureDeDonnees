@@ -8,9 +8,10 @@ public class Main {
     repo.insert(1500, "g7h8i9", "Alice");
     repo.insert(750, "j1k2l3", "Charlie");
     repo.insert(1200, "m4n5o6", "Bob");
+    
 
 
-
-    repo.printRootInfo();
+    System.out.println(repo.findCommit(752));
+   System.out.println(repo.findCommit(1200));
 
 }}

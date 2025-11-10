@@ -65,8 +65,21 @@ public class Q1 {
   
 
     public String findCommit(int timestamp) {
-        // TODO: 
-        return null;
+        CommitNode marqueur = root;
+
+    while (marqueur != null) {
+        if (timestamp == marqueur.timestamp) {
+            return marqueur.commitHash;
+        } else if (timestamp < marqueur.timestamp) {
+            marqueur = marqueur.left;
+        } else {
+            marqueur = marqueur.right;
+        }
+    }
+
+    return null;
+    
+    
     }
 
     public List<String> getCommitsBetween(int startTime, int endTime) {
