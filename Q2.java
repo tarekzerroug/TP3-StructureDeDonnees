@@ -14,6 +14,21 @@ public class Q2 {
     
     private TreeNode root;
     
+    // on rajoute la fonction in order pour parcourir dans l'ordre croissant l'arbre .
+    public void inorder(List<Integer> l,TreeNode root){
+         if(root==null){
+            return;
+         }
+         inorder(l,root.left);
+         l.add(root.val);
+         inorder(l,root.right);
+    }
+    
+    
+    
+    
+    
+    
     public Q2(TreeNode root) {
         this.root = root;
     }
@@ -27,9 +42,15 @@ public class Q2 {
         return 0;
     }
     
-    public boolean isValidBST(TreeNode root) {
-        // TODO
-        return false;
+    public boolean isValidBST(TreeNode root)  {
+        List<Integer> l=new ArrayList<>();
+        inorder(l,root);
+        for (int i = 0; i < l.size() - 1; i++) {
+            if (l.get(i) >= l.get(i + 1)) {
+                    return false;
+            }
+        }
+        return true;
     }
     
     public List<Integer> findAllBSTRoots() {
