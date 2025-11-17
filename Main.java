@@ -23,7 +23,6 @@ public class Main {
     System.out.println(repo.getTimeline());
 
    
-   
     System.out.println("-----------Q2----------");
     // on réalise les tests pour Q2 
 
@@ -31,7 +30,6 @@ public class Main {
 
         Q2 q2 = new Q2(root);
 
-        // Tu peux continuer à construire l’arbre :
         root.left = new Q2.TreeNode(4);
         root.right = new Q2.TreeNode(3);
 
@@ -44,6 +42,15 @@ public class Main {
 
         root.right.right.right = new Q2.TreeNode(6);
         root.right.right.left = new Q2.TreeNode(4);
+        System.out.println(q2.maxSumBST(root));
         System.out.println(q2.isValidBST(root));
+        System.out.println(q2.findAllBSTRoots());
+        System.out.println(q2.countValidBSTs());
+        System.out.println(q2.getMinBSTSum());
+        System.out.println(q2.getBSTSizeDistribution());
+        System.out.println(q2.findLargestBST());
+        System.out.println(q2.getInorderBST(root.right.right));
 
-}}
+    }
+
+}

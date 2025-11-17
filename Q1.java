@@ -128,7 +128,7 @@ public List<String> getCommitsBetween(int startTime, int endTime) {
             best = marqueur;
         }
 
-        // Règle imposée par l'énoncé du TP
+    
         if (marqueur.timestamp >= timestamp) {
             marqueur = marqueur.left;
         } else {
@@ -252,7 +252,7 @@ public List<String> getTimeline() {
     Stack<CommitNode> stack = new Stack<>();
     CommitNode marqueur = root;
 
-    // Parcours in-order (gauche -> racine -> droite)
+    // Parcours in-order (gauche  racine  - droite)
     while (marqueur != null || !stack.isEmpty()) {
 
         // descendre à gauche
