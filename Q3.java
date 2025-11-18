@@ -35,7 +35,11 @@ public class Q3 {
             return Long.compare(s1.population, s2.population);
         });
 
+        this.currentPopulations = new long[populations.length];
+        this.multipliers = multipliers;
+
         for (int i = 0; i < populations.length; i++) {
+            this.currentPopulations[i] = populations[i];
             minHeap.offer(new Sample(populations[i], i, multipliers[i]));
         }
     }
@@ -44,13 +48,14 @@ public class Q3 {
         for (int i = 0; i < cycles; i++) {
             Sample sample = minHeap.poll();
             sample.population = (sample.population * sample.multiplier) % MOD;
+            currentPopulations[sample.index] = sample.population;
             minHeap.offer(sample);
         }
 
         int[] resultat = new int[minHeap.size()];
 
         for (Sample sample : minHeap) {
-            resultat[sample.index] = (int) sample.population;
+            resultat[sample.index] = (int) (currentPopulations[sample.index] % MOD);
         }
 
         return resultat;
@@ -111,11 +116,13 @@ public class Q3 {
 
             long exp = fastExpo(s.multiplier, multipliant, MOD);
             s.population = (s.population * exp) % MOD;
+            currentPopulations[s.index] = s.population;
+            minHeap.offer(s);
         }
 
         int[] resultat = new int[minHeap.size()];
-        for (Sample sample : minHeap) {
-            resultat[sample.index] = (int) sample.population;
+        for (int i = 0; i < heapList.size(); i++) {
+            resultat[i] = (int) (currentPopulations[i] % MOD);
         }
         return resultat;
     }
@@ -133,11 +140,7 @@ public class Q3 {
     }
 
     public long[] getCurrentState() {
-        long[] resultat = new long[minHeap.size()];
-        for (Sample sample : minHeap) {
-            resultat[sample.index] = sample.population;
-        }
-        return resultat;
+        return currentPopulations.clone();
     }
 
     public int findMinIndex() {
@@ -145,15 +148,24 @@ public class Q3 {
     }
 
     public long predictPopulation(int sampleIndex, int futureCycles) {
+
+        List<Sample> heapList = new ArrayList<>(minHeap);
+        heapList.sort((s1, s2) -> {
+            if (Long.compare(s1.population, s2.population) == 0) {
+                return Integer.compare(s1.index, s2.index);
+            }
+            return Long.compare(s1.population, s2.population);
+        });
+
         long base = futureCycles / minHeap.size();
         long extra = futureCycles % minHeap.size();
 
         long k = base;
 
         int position = -1;
-        for (Sample s : minHeap) {
-            position++;
-            if (s.index == sampleIndex) {
+        for (int i = 0; i < heapList.size(); i++) {
+            if (heapList.get(i).index == sampleIndex) {
+                position = i;
                 break;
             }
         }

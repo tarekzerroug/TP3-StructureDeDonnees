@@ -85,9 +85,9 @@ public class Main {
         }
 
         q3.buildHeap(populationsInt, multipliers);
+        System.out.println((long) q3.predictPopulation(0, 3));
         System.out.println((long) q3.predictPopulation(1, 3));
         System.out.println((long) q3.predictPopulation(2, 3));
-        System.out.println((long) q3.predictPopulation(3, 3));
 
     }
 
