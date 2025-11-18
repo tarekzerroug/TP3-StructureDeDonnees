@@ -1,9 +1,36 @@
 import java.util.*;
-
+ /*
+ * ================================================================
+ *                ATTESTATION D'INTÉGRITÉ ACADÉMIQUE
+ * ================================================================
+ *
+ * [ ]  Je certifie n’avoir utilisé aucun outil d’IA générative
+ *      pour résoudre ce problème.
+ *
+ * [ oui ]  J’ai utilisé un ou plusieurs outils d’IA générative.
+ *      Détails ci-dessous :
+ *
+ *      • Outil(s) utilisé(s) :
+ *        - ChatGPT 
+ *
+ *      • Raison(s) de l’utilisation :
+ *        - Compréhension du problème  , écriture des commentaires
+ *       
+ *
+ *      • Parties du code affectées :
+ *        - aucune 
+ * ================================================================
+ */
 
 public class Q1 {
     
-
+     
+    
+    
+    
+    
+    
+    
     private class CommitNode {
         int timestamp;
         String commitHash;
