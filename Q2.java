@@ -161,7 +161,7 @@ public class Q2 {
         List<TreeNode> nodes = new ArrayList<>();
         inorderNodes(nodes, root);
 
-        int best = Integer.MAX_VALUE; // valeur sentinelle
+        int best = Integer.MAX_VALUE; 
 
         for (TreeNode n : nodes) {
             if (isValidBST(n)) {
