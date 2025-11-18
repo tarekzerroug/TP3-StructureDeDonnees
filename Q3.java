@@ -1,7 +1,7 @@
 
 import java.util.*;
 
- /*
+/*
  * ================================================================
  *                ATTESTATION D'INTÉGRITÉ ACADÉMIQUE
  * ================================================================
@@ -23,10 +23,6 @@ import java.util.*;
  *        - aucune 
  * ================================================================
  */
-
-
-
-
 public class Q3 {
 
     private static final int MOD = 1_000_000_007;
@@ -175,31 +171,28 @@ public class Q3 {
 
     public long predictPopulation(int sampleIndex, int futureCycles) {
 
-        List<Sample> heapList = new ArrayList<>(minHeap);
-        heapList.sort((s1, s2) -> {
-            if (Long.compare(s1.population, s2.population) == 0) {
-                return Integer.compare(s1.index, s2.index);
+        PriorityQueue<Sample> copy = new PriorityQueue<>(
+                (a, b) -> a.population == b.population
+                        ? Integer.compare(a.index, b.index)
+                        : Long.compare(a.population, b.population)
+        );
+
+        Sample sample = null;
+
+        for (Sample s : minHeap) {
+            Sample clone = new Sample(s.population, s.index, s.multiplier);
+            if (clone.index == sampleIndex) {
+                sample = clone;
             }
-            return Long.compare(s1.population, s2.population);
-        });
-
-        long base = futureCycles / minHeap.size();
-        long extra = futureCycles % minHeap.size();
-
-        long k = base;
-
-        int position = -1;
-        for (int i = 0; i < heapList.size(); i++) {
-            if (heapList.get(i).index == sampleIndex) {
-                position = i;
-                break;
-            }
-        }
-        if (position < extra) {
-            k++;
+            copy.offer(clone);
         }
 
-        return (fastExpo(multipliers[sampleIndex], k, MOD) * currentPopulations[sampleIndex]) % MOD;
+        for (int i = 0; i < futureCycles; i++) {
+            Sample min = copy.poll();
+            min.population = (min.population * min.multiplier) % MOD;
+            copy.offer(min);
+        }
+        return sample.population % MOD;
     }
 
 }
