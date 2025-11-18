@@ -1,47 +1,43 @@
+
 import java.util.*;
 
 public class Q2 {
-    
+
     public static class TreeNode {
+
         int val;
         TreeNode left;
         TreeNode right;
-        
+
         public TreeNode(int val) {
             this.val = val;
         }
-       
+
         // on rajoute la méthode tostring
         @Override
         public String toString() {
             return "" + val;
-}
-   
-   
+        }
+
     }
-    
+
     private TreeNode root;
-    
-   
-    
-    
-    
-    
-    
+
     public Q2(TreeNode root) {
         this.root = root;
     }
-    
+
     public Q2() {
         this.root = null;
     }
-    
 
     // on définit qlqs fonctions auxiliaires
     // Parcours in-order, mais on stocke les valeurs uniquement
     // (utile pour vérifier si l'arbre respecte l'ordre croissant d'un BST)
     public void inorder(List<Integer> l, TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
         inorder(l, root.left);
         l.add(root.val);
         inorder(l, root.right);
@@ -50,13 +46,13 @@ public class Q2 {
     // Variante : on stocke les noeuds eux-mêmes
     // (utile pour explorer tous les sous-arbres possibles)
     public void inorderNodes(List<TreeNode> nodes, TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
         inorderNodes(nodes, root.left);
         nodes.add(root);
         inorderNodes(nodes, root.right);
     }
-
-    
 
     // 1) Somme maximale parmi tous les sous-arbres BST
     public int maxSumBST(TreeNode root) {
@@ -74,10 +70,14 @@ public class Q2 {
 
                 // on calcule la somme
                 int somme = 0;
-                for (TreeNode t : sub) somme += t.val;
+                for (TreeNode t : sub) {
+                    somme += t.val;
+                }
 
                 // on garde la meilleure
-                if (somme > best) best = somme;
+                if (somme > best) {
+                    best = somme;
+                }
             }
         }
 
@@ -91,7 +91,9 @@ public class Q2 {
         inorder(l, root);
 
         for (int i = 0; i < l.size() - 1; i++) {
-            if (l.get(i) >= l.get(i + 1)) return false;
+            if (l.get(i) >= l.get(i + 1)) {
+                return false;
+            }
         }
 
         return true;
@@ -106,7 +108,9 @@ public class Q2 {
 
         // pour chaque noeud, on vérifie si c’est un BST quand il est racine
         for (TreeNode n : nodes) {
-            if (isValidBST(n)) result.add(n.val);
+            if (isValidBST(n)) {
+                result.add(n.val);
+            }
         }
 
         Collections.sort(result); // ordre croissant demandé
@@ -120,7 +124,9 @@ public class Q2 {
 
         int count = 0;
         for (TreeNode n : nodes) {
-            if (isValidBST(n)) count++;
+            if (isValidBST(n)) {
+                count++;
+            }
         }
         return count;
     }
@@ -141,15 +147,21 @@ public class Q2 {
 
                 // calculs de la somme
                 int somme = 0;
-                for (TreeNode t : sub) somme += t.val;
+                for (TreeNode t : sub) {
+                    somme += t.val;
+                }
 
                 // mise a jour
-                if (somme < best) best = somme;
+                if (somme < best) {
+                    best = somme;
+                }
             }
         }
 
-        if (best == Integer.MAX_VALUE) return -1; // aucun BST
-        return best;
+        if (best == Integer.MAX_VALUE) {
+            return -1; // aucun BST
+
+                }return best;
     }
 
     //  Répartition par taille : {taille : fréquence}
@@ -193,7 +205,9 @@ public class Q2 {
 
                 int size = sub.size();
                 int somme = 0;
-                for (TreeNode t : sub) somme += t.val;
+                for (TreeNode t : sub) {
+                    somme += t.val;
+                }
 
                 // priorité à la taille, puis somme
                 if (size > bestSize || (size == bestSize && somme > bestSum)) {
@@ -210,7 +224,9 @@ public class Q2 {
     // ) Retourne l’ordre in-order d’un BST donné
     public List<Integer> getInorderBST(TreeNode root) {
         // si pas un BST, on retourne une liste vide
-        if (!isValidBST(root)) return new ArrayList<>();
+        if (!isValidBST(root)) {
+            return new ArrayList<>();
+        }
 
         List<Integer> l = new ArrayList<>();
         inorder(l, root);
